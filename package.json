@@ -37,9 +37,11 @@
 		"url": "https://github.com/DallasHoff/find-partial-anagrams"
 	},
 	"keywords": [
+		"anagram-solver",
 		"anagram",
-		"solver",
 		"word",
-		"letters"
+		"word-game",
+		"letters",
+		"scrabble"
 	]
 }
