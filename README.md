@@ -27,3 +27,11 @@ const partialAnagrams = findPartialAnagrams(
 	wordList
 );
 ```
+
+Question marks can be used as wildcards, and they will match any letter.
+
+```javascript
+const partialAnagrams = findPartialAnagrams('ac?t', wordList);
+
+// This input would match words like "cart", "cast", and "cut".
+```

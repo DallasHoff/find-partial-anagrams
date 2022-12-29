@@ -1,36 +1,39 @@
+const wildcard = '?';
+
 // prettier-ignore
 export type UpperCaseLetter = 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H' | 'I' | 'J' | 'K' | 'L' | 'M' | 'N' | 'O' | 'P' | 'Q' | 'R' | 'S' | 'T' | 'U' | 'V' | 'W' | 'X' | 'Y' | 'Z';
 export type LowerCaseLetter = Lowercase<UpperCaseLetter>;
 export type Letter = LowerCaseLetter | UpperCaseLetter;
+export type Char = Letter | typeof wildcard;
 
-export function isLetter(input: unknown): input is Letter {
-	return typeof input === 'string' && /^[A-Za-z]{1}$/.test(input);
+export function isChar(input: unknown): input is Char {
+	return typeof input === 'string' && /^[A-Za-z\?]{1}$/.test(input);
 }
 
 export function findPartialAnagrams(
-	input: string | Letter[],
+	input: string | Char[],
 	wordList: string[]
 ): string[] {
 	const partialAnagrams: string[] = [];
 
 	// Validation
-	let inputLetters: Letter[] = [];
-	const inputErrorMessage = 'Input must be a string or array of letters (a-z).';
+	let inputChars: Char[] = [];
+	const inputErrorMessage = `Input must be a string or array containing only letters (a-z) and wildcards (${wildcard}).`;
 	const noWordListErrorMessage =
 		'No word list was provided to search for matches. Provide an array of strings.';
 
 	if (typeof input === 'string') {
-		if (!input || !/^[A-Za-z]+$/.test(input)) {
+		if (!input || !/^[A-Za-z\?]+$/.test(input)) {
 			throw new Error(inputErrorMessage);
 		}
 
-		inputLetters = input.toLowerCase().split('') as Letter[];
+		inputChars = input.toLowerCase().split('') as Char[];
 	} else if (Array.isArray(input)) {
-		if (input.length === 0 || input.some((letter) => !isLetter(letter))) {
+		if (input.length === 0 || input.some((char) => !isChar(char))) {
 			throw new Error(inputErrorMessage);
 		}
 
-		inputLetters = input;
+		inputChars = input;
 	} else {
 		throw new Error(inputErrorMessage);
 	}
@@ -40,21 +43,24 @@ export function findPartialAnagrams(
 	}
 
 	// Prune words longer than provided number of letters
-	wordList = wordList.filter((word) => word.length <= inputLetters.length);
+	wordList = wordList.filter((word) => word.length <= inputChars.length);
 
 	// Find partial anagrams
 	wordList.forEach((testWord) => {
 		const testWordLetters = testWord.split('') as Letter[];
-		const unmatchedLetters: Letter[] = inputLetters.slice();
+		const unmatchedChars: Char[] = inputChars.slice();
 		const matchedLetters: Letter[] = [];
 
 		testWordLetters.forEach((testLetter) => {
-			if (unmatchedLetters.includes(testLetter)) {
+			const testLetterIndex = unmatchedChars.indexOf(testLetter);
+			let matchedCharIndex =
+				testLetterIndex > -1
+					? testLetterIndex
+					: unmatchedChars.indexOf(wildcard);
+
+			if (matchedCharIndex > -1) {
+				unmatchedChars.splice(matchedCharIndex, 1);
 				matchedLetters.push(testLetter);
-				unmatchedLetters.splice(
-					unmatchedLetters.findIndex((letter) => letter === testLetter),
-					1
-				);
 			}
 		});
 
