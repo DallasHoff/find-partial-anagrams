@@ -1,6 +1,6 @@
 # Find Partial Anagrams
 
-Takes a set of letters and returns all the words in a given word list that can be made using all or subset of those letters.
+Takes a set of letters and returns all the words in a given word list that can be made using all or a subset of those letters.
 
 ## Install
 
