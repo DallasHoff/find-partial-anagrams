@@ -1,0 +1,44 @@
+{
+	"name": "find-partial-anagrams",
+	"version": "0.0.0",
+	"description": "Takes a set of letters and returns all the words in a provided word list that can be made with a subset of those letters.",
+	"type": "module",
+	"main": "./dist/main.umd.cjs",
+	"module": "./dist/main.js",
+	"types": "./dist/main.d.ts",
+	"exports": {
+		".": {
+			"import": "./dist/main.js",
+			"require": "./dist/main.umd.cjs"
+		}
+	},
+	"files": [
+		"dist"
+	],
+	"scripts": {
+		"build": "vite build && tsc",
+		"test": "vitest",
+		"coverage": "vitest run --coverage",
+		"benchmark": "vitest bench",
+		"prepublishOnly": "npm run build && vitest run"
+	},
+	"devDependencies": {
+		"@types/node": "^18.11.10",
+		"@vitest/coverage-c8": "^0.25.3",
+		"prettier": "^2.8.0",
+		"typescript": "^4.9.3",
+		"vite": "^3.2.4",
+		"vitest": "^0.25.3"
+	},
+	"author": "Dallas Hoffman",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/DallasHoff/find-partial-anagrams"
+	},
+	"keywords": [
+		"anagram",
+		"solver",
+		"word",
+		"letters"
+	]
+}
