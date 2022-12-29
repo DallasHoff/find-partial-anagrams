@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { findPartialAnagrams, isLetter } from './main';
-import words from '../public/english-words';
+import words from './word-list';
 
 describe('isLetter', () => {
 	it('should validate letters', () => {

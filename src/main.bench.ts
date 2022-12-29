@@ -1,6 +1,6 @@
 import { bench, describe } from 'vitest';
 import { findPartialAnagrams } from './main';
-import words from '../public/english-words';
+import words from './word-list';
 
 describe('findPartialAnagrams', () => {
 	bench('3 letters', () => {
