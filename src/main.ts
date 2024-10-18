@@ -1,15 +1,37 @@
+/**
+ * This module provides the `findPartialAnagrams` function and its
+ * related types and helpers.
+ * @module
+ */
+
 const wildcard = '?';
 
 // prettier-ignore
+/** Represents a single uppercase letter. */
 export type UpperCaseLetter = 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H' | 'I' | 'J' | 'K' | 'L' | 'M' | 'N' | 'O' | 'P' | 'Q' | 'R' | 'S' | 'T' | 'U' | 'V' | 'W' | 'X' | 'Y' | 'Z';
+
+/** Represents a single lowercase letter. */
 export type LowerCaseLetter = Lowercase<UpperCaseLetter>;
+
+/** Represents any single letter. */
 export type Letter = LowerCaseLetter | UpperCaseLetter;
+
+/** Represents a single letter or a wildcard character. */
 export type Char = Letter | typeof wildcard;
 
+/** Checks whether the passed value is a valid `Char`. */
 export function isChar(input: unknown): input is Char {
 	return typeof input === 'string' && /^[A-Za-z\?]{1}$/.test(input);
 }
 
+/**
+ * Takes a set of letters and returns all the words in a given word list
+ * that can be made using all or a subset of those letters.
+ *
+ * @param input A string or array of characters that may appear in matches
+ * @param wordList An array of words to check for matches with your input
+ * @returns Items from `wordList` that are partial anagrams of your `input`
+ */
 export function findPartialAnagrams(
 	input: string | Char[],
 	wordList: string[]
