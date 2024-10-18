@@ -5,7 +5,10 @@ export default defineConfig({
 	build: {
 		lib: {
 			name: 'FindPartialAnagrams',
-			entry: [resolve(__dirname, 'src/main.ts')],
+			entry: [
+				resolve(__dirname, 'src/main.ts'),
+				resolve(__dirname, 'src/word-list.ts'),
+			],
 		},
 	},
 });

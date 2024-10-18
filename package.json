@@ -3,13 +3,17 @@
 	"version": "0.2.0",
 	"description": "Takes a set of letters and returns all the words in a given word list that can be made using all or a subset of those letters.",
 	"type": "module",
-	"main": "./dist/main.umd.cjs",
+	"main": "./dist/main.cjs",
 	"module": "./dist/main.js",
 	"types": "./dist/main.d.ts",
 	"exports": {
 		".": {
 			"import": "./dist/main.js",
-			"require": "./dist/main.umd.cjs"
+			"require": "./dist/main.cjs"
+		},
+		"./word-list": {
+			"import": "./dist/word-list.js",
+			"require": "./dist/word-list.cjs"
 		}
 	},
 	"files": [
