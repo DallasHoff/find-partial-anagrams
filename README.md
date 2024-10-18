@@ -4,8 +4,14 @@ Takes a set of letters and returns all the words in a given word list that can b
 
 ## Install
 
-```
+```sh
 npm install find-partial-anagrams
+# or...
+yarn add find-partial-anagrams
+# or...
+pnpm install find-partial-anagrams
+# or...
+deno add jsr:@dallashoff/find-partial-anagrams
 ```
 
 ## Examples

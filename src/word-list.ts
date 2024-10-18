@@ -1,5 +1,6 @@
 /**
  * A list of English words up to 16 letters long.
+ * @module
  */
 export default [
 	'abdominoanterior',
