@@ -1,9 +1,3 @@
-/**
- * This module provides the `findPartialAnagrams` function and its
- * related types and helpers.
- * @module
- */
-
 const wildcard = '?';
 
 // prettier-ignore
