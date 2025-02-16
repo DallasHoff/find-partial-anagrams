@@ -1,5 +1,10 @@
 import { describe, expect, it } from 'vitest';
-import { findPartialAnagrams, isChar } from './main';
+import {
+	compressWordList,
+	decompressWordList,
+	findPartialAnagrams,
+	isChar,
+} from './main';
 import words from './word-list';
 
 describe('isChar', () => {
@@ -65,5 +70,19 @@ describe('findPartialAnagrams', () => {
 		expect(wildcardAnagrams2).toContain('cast');
 		expect(wildcardAnagrams2).toContain('cat');
 		expect(wildcardAnagrams2).not.toContain('caped');
+	});
+});
+
+describe('compressWordList', () => {
+	it('should compress a word list', () => {
+		const compressed = compressWordList(words);
+
+		expect(compressed.length === words.length).toBe(true);
+		expect(compressed.join('\n').length < words.join('\n').length).toBe(true);
+
+		const decompressed = decompressWordList(compressed);
+
+		expect(decompressed.length === words.length).toBe(true);
+		expect(decompressed).toEqual(words.sort());
 	});
 });

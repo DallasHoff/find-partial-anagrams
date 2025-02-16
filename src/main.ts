@@ -87,3 +87,51 @@ export function findPartialAnagrams(
 
 	return partialAnagrams;
 }
+
+/**
+ * Compresses a word list using incremental encoding.
+ *
+ * @param wordList An array of words to compress
+ * @returns An array of encoded words that can be passed to `decompressWordList`
+ */
+export function compressWordList(wordList: string[]): string[] {
+	const words = wordList.sort();
+	let encodedWords = [words[0]];
+
+	const commonPrefixLength = (a: string, b: string): number => {
+		let i = 0;
+		while (i < a.length && i < b.length && a[i] === b[i]) {
+			i++;
+		}
+		return i;
+	};
+
+	for (let i = 1; i < words.length; i++) {
+		const prefixLen = commonPrefixLength(words[i - 1], words[i]);
+		const suffix = words[i].slice(prefixLen);
+		encodedWords.push(`${prefixLen}${suffix}`);
+	}
+
+	return encodedWords;
+}
+
+/**
+ * Decompresses a word list that uses incremental encoding.
+ *
+ * @param compressedWordList An array of encoded words from `compressWordList`
+ * @returns An array of decoded words
+ */
+export function decompressWordList(compressedWordList: string[]): string[] {
+	const encodedWords = compressedWordList;
+	let decodedWords = [encodedWords[0]];
+
+	for (let i = 1; i < encodedWords.length; i++) {
+		const prefixLen = encodedWords[i].match(/^[0-9]+/)?.[0] ?? '0';
+		const prefix = decodedWords[i - 1].slice(0, parseInt(prefixLen));
+		const suffix = encodedWords[i].slice(prefixLen.length);
+		const decodedWord = `${prefix}${suffix}`;
+		decodedWords.push(decodedWord);
+	}
+
+	return decodedWords;
+}
