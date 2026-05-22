@@ -17,7 +17,7 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@670825a89dc0abd596e7a3abd0f5e3f6e5faf37c
         with:
-          node-version: '24'
+          node-version: '22.14.0'
           registry-url: 'https://registry.npmjs.org'
           package-manager-cache: false
       - name: Install Dependencies
